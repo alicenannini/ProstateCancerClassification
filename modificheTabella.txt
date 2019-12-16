@@ -1,0 +1,3 @@
+Le seguenti modifiche sono state effettuate sulla tabella originale (scaricata da https://www.kaggle.com/sajidsaifi/prostate-cancer):
+1. È stata eliminata la prima colonna, contenente gli id delle osservazioni.
+2. I valori della colonna "diagnosis_result" sono stati convertiti in binario. In particolare, il valore "M" (tumore maligno) è stato modificato in 1, mentre il valore "B" (tumore benigno) in 0.

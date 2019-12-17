@@ -3,7 +3,6 @@
 \contentsline {section}{\numberline {1}Introduzione}{1}
 \contentsline {section}{\numberline {2}Tabella dei dati}{1}
 \contentsline {section}{\numberline {3}Analisi dei dati}{1}
-\contentsline {subsection}{\numberline {3.1}Regressione Logistica}{1}
-\contentsline {subsection}{\numberline {3.2}Analisi Discriminante Lineare e Quadratica}{2}
-\contentsline {subsection}{\numberline {3.3}Conclusioni}{3}
-\contentsline {section}{\numberline {4}Appendice}{3}
+\contentsline {subsection}{\numberline {3.1}Regressione Logistica}{2}
+\contentsline {subsection}{\numberline {3.2}Analisi Discriminante Lineare e Quadratica}{3}
+\contentsline {subsection}{\numberline {3.3}Conclusioni}{4}

@@ -1,5 +1,5 @@
 \documentclass[11pt,a4paper,oneside]{article}
-\usepackage[a4paper,top=2cm,bottom=3cm,left=2cm,right=2cm]{geometry}
+\usepackage[a4paper,top=3.5cm,bottom=3.5cm,left=3.5cm,right=3cm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
@@ -38,7 +38,7 @@ Il dataset è stato recuperato dal sito \emph{https://www.kaggle.com/sajidsaifi/
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\textwidth]{images/head}
+\includegraphics[width=1\textwidth]{images/head}
 \caption{Prime righe del file \textit{tabella.csv}}
 \label{fig:head}
 \end{figure}
@@ -57,12 +57,13 @@ L'accuratezza del modello è molto soddisfacente:
 [1] 0.89
 \end{verbatim}
 e questo significa che la nostra classificazione ha senso di esistere. Da notare anche il valore $AIC$, che è molto alto (87\%).
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
-\includegraphics[width=0.4\textwidth]{images/glm}
+\includegraphics[width=0.5\textwidth]{images/glm}
 \caption{Sommario della regressione logistica sui dati}
 \label{fig:glm}
 \end{figure}
+
 Procediamo, per cui, con l'analisi della matrice di confusione, della curva $ROC$ e dell'area sotto alla curva:
 \begin{verbatim}
 > mconfmat(p$diagnosis_result,p.glm.pre)
@@ -120,7 +121,7 @@ predicted 0        6       31
 In questo caso, otteniamo un guadagno nell'accuratezza (87\%) in confronto al modello lineare, mentre la curva evidenzia invece un peggioramento del modello: le predizioni sono, infatti, migliori in generale perché il numero di tumori classificati come maligni è più vicino alla realtà (63 rispetto al totale effettivo 62), ma nel particolare si riscontra un maggior numero di falsi positivi e falsi negativi.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{images/curveROC}
+\includegraphics[width=0.8\textwidth]{images/curveROC}
 \caption{Curve ROC relative ai tre modelli analizzati}
 \label{fig:curveROC}
 \end{figure}
@@ -128,8 +129,7 @@ In questo caso, otteniamo un guadagno nell'accuratezza (87\%) in confronto al mo
 \subsection{Conclusioni}
 Possiamo concludere che il primo modello, basato sulla regressione logistica, è il più soddisfacente: in particolare, è quello che riesce a classificare il maggior numero di tumori maligni, considerato il caso più critico e quindi più importante da rilevare. Grazie a questa classificazione, possiamo dire che ci sono buone probabilità di poter intervenire in supporto degli esami medici, e velocizzare il processo diagnostico del tumore preso in considerazione, riuscendo a segnalare tempestivamente i casi più gravi considerando le caratteristiche fisiche del tessuto istologico che sono identificabili tramite esami veloci e poco invasivi. È da sottolineare che quest'analisi viene effettuata su un numero relativamente ristretto di osservazioni, per cui sarà interessante portarla avanti aggiungendo dati di altri casi per vedere se l'accuratezza viene mantenuta su larga scala.
 
-\section{Appendice}
-Prendendo in considerazione il modello di figura~\vref{fig:glm}, abbiamo analizzato le correlazioni tra gli attributi per cercare di ridurlo mantenendo risultati il più alti possibili. Abbiamo trovato una forte relazione tra $area$ e $perimeter$
-
+%\section{Appendice}
+%Prendendo in considerazione il modello di figura~\vref{fig:glm}, analizziamo le correlazioni tra gli attributi per cercare di ridurlo mantenendo risultati il più alti possibili. Si trova una forte relazione tra $area$ e $perimeter$, per cui procediamo a eliminare uno dei due fattori ($area$), per vedere se l'altro riesce a spiegare meglio i dati:
 
 \end{document}

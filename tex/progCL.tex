@@ -1,5 +1,5 @@
 \documentclass[11pt,a4paper,oneside]{article}
-\usepackage[a4paper,top=2.5cm,bottom=2cm,left=2.5cm,right=2cm]{geometry}
+\usepackage[a4paper,top=2cm,bottom=2.5cm,left=2.5cm,right=2cm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
@@ -31,10 +31,10 @@ Il dataset è stato recuperato dal sito \emph{https://www.kaggle.com/sajidsaifi/
 \item \textbf{Texture}: struttura del nodulo (più è disomogeneo più è alta la probabilità che sia maligno)
 \item \textbf{Perimeter}: perimetro approssimativo del nodulo
 \item \textbf{Area}: area approssimativa del nodulo
-\item \textbf{Smoothness}: regolarità del nodulo, quanto il tessuto è liscio
+\item \textbf{Smoothness}: regolarità del nodulo, indice di quanto il tessuto sia liscio
 \item \textbf{Compactness}: compattezza del nodulo, calcolata in funzione del volume e della superficie
 \item \textbf{Simmetry}: simmetria del nodulo (più il tessuto è asimmetrico più è alto il rischio di malignità)
-\item \textbf{Fractal Dimension}: dimensione frattale relativa al nodulo, rapporto che fornisce un indice statistico di complessità (in \%)
+\item \textbf{Fractal Dimension}: dimensione frattale relativa al nodulo, rapporto che fornisce un indice statistico di complessità
 \end{itemize}
 
 \begin{figure}[h]
@@ -76,12 +76,11 @@ predicted 0        3       30
 > mauc(p.glm.roc)
 [1] 0.9210526
 \end{verbatim}
-Vediamo dalla matrice che i veri positivi, cioè le osservazioni che appartengono alla classe $1$ e sono stati effettivamente classificati come casi maligni, risultano 59 su un totale di 62, e questo risultato è molto buono per il nostro scopo. È, infatti, fondamentale che i casi gravi, per cui è necessario effettuare un rapido intervento, vengano individuati correttamente. Le osservazione relative, invece, a tumori benigni sono state individuate con una percentuale più bassa, dal momento che ne sono state classificate correttamente solo 30 su 38. Si è ottenuto, perciò, un $TNR$ (True Negative Rate) uguale al 79\%, a fronte di un $TPR$ (True Positive Rate) del 95\%.
-Andando infine a studiare la curva $ROC$ (fig.~\vref{fig:curveROC}), possiamo confermare quanto trovato nella matrice di confusione: la curva non è perfetta, ma è di molto sopra al tirare a caso (linea rossa tratteggiata). L'area sotto la curva, uguale al 92\% è ulteriore conferma della bontà del nostro modello.
+Vediamo dalla matrice che i veri positivi, cioè le osservazioni che appartengono alla classe $1$ e sono stati effettivamente classificati come casi maligni, sono 59 su un totale di 62, e questo risultato è molto buono per il nostro scopo. È infatti fondamentale che i casi gravi, per cui è necessario effettuare un rapido intervento, vengano individuati correttamente. Le osservazione relative, invece, a tumori benigni sono state individuate con una percentuale più bassa, dal momento che ne sono state classificate correttamente solo 30 su 38. Si è ottenuto, perciò, un $TNR$ (True Negative Rate) uguale al 79\%, a fronte di un $TPR$ (True Positive Rate) del 95\%.
+Andando infine a studiare la curva $ROC$ (fig.~\vref{fig:curveROC}), possiamo confermare quanto trovato nella matrice di confusione: la curva non è perfetta, ma è di molto sopra al tirare a caso (linea rossa tratteggiata). L'area sotto la curva, uguale a 0.92, è ulteriore conferma della bontà del modello costruito.
 
 \subsection{Analisi Discriminante Lineare e Quadratica}
 Proviamo a effettuare anche un'analisi discriminante, per poter poi confrontare i vari modelli ottenuti e vedere quale è da ritenere migliore per il nostro problema di classificazione.
-
 Effettuiamo, inizialmente, il calcolo del modello lineare e ne valutiamo l'efficacia tramite la predizione:
 \begin{verbatim}
 > p.lda=lda(diagnosis_result~.,data=p,CV=F)
@@ -119,19 +118,19 @@ predicted 0        6       31
 > mauc(p.qda.roc)
 [1] 0.890745
 \end{verbatim}
-In questo caso, otteniamo un guadagno nell'accuratezza (87\%) in confronto al modello lineare, mentre la curva evidenzia invece un peggioramento del modello: le predizioni sono, infatti, migliori in generale perché il numero di tumori classificati come maligni è più vicino alla realtà (63 rispetto al totale effettivo 62), ma nel particolare si riscontra un maggior numero di falsi positivi e falsi negativi.
+In questo caso, otteniamo un guadagno nell'accuratezza (87\%) in confronto al modello lineare, mentre la curva evidenzia invece un peggioramento: le predizioni sono, infatti, migliori in generale perché il numero di tumori classificati come maligni è più vicino alla realtà (63 rispetto al totale effettivo 62), ma nel particolare si riscontra un maggior numero di falsi positivi e falsi negativi.
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.45\textwidth]{images/curveROC}
+\includegraphics[width=0.55\textwidth]{images/curveROC}
 \caption{Curve ROC relative ai tre modelli analizzati}
 \label{fig:curveROC}
 \end{figure}
 
 \subsection{Conclusioni}
-Possiamo concludere che il primo modello, basato sulla regressione logistica, è il più soddisfacente: in particolare, è quello che riesce a classificare il maggior numero di tumori maligni, considerato il caso più critico e quindi più importante da rilevare. Grazie a questa classificazione, possiamo dire che ci sono buone probabilità di poter intervenire in supporto degli esami medici, e velocizzare il processo diagnostico del tumore preso in considerazione, riuscendo a segnalare tempestivamente i casi più gravi considerando le caratteristiche fisiche del tessuto istologico che sono identificabili tramite esami veloci e poco invasivi. È da sottolineare che quest'analisi viene effettuata su un numero relativamente ristretto di osservazioni, per cui sarà interessante portarla avanti aggiungendo dati di altri casi per vedere se l'accuratezza viene mantenuta su larga scala.
+Possiamo concludere che il primo modello, basato sulla regressione logistica, è il più soddisfacente: in particolare, è quello che riesce a classificare il maggior numero di tumori maligni, considerato il caso più critico e quindi più importante da rilevare. Grazie a questa classificazione, possiamo dire che ci sono buone probabilità di poter intervenire in supporto degli esami medici, e velocizzare il processo diagnostico del tumore preso in considerazione, riuscendo a segnalare tempestivamente i casi più gravi considerando le caratteristiche fisiche del tessuto istologico che sono identificabili tramite esami veloci e poco invasivi. È da sottolineare che quest'analisi viene effettuata su un numero relativamente ristretto di osservazioni, per cui sarà interessante portarla avanti aggiungendo dati di altri casi per vedere se l'accuratezza venga mantenuta su larga scala.
 
 \section{Appendice}
-Prendendo in considerazione il modello di figura~\vref{fig:glm}, analizziamo le correlazioni tra gli attributi per cercare di ridurlo mantenendo risultati il più alti possibili. Si trova una forte relazione tra $area$ e $perimeter$, per cui procediamo a eliminare uno dei due fattori ($perimetro$), per vedere se l'altro riesce a spiegare meglio i dati: l'accuratezza scenda all'87\%, in confronto all'originale del 89\%, e infatti si vede dalla matrice di confusione che il $TPR$ è diminuito, mentre l'area sotto alla curva $ROC$ è pressoché uguale. Procediamo con l'eliminazione del fattore $radius$, che presenta il \textit{p-value} minore: la situazione rimane regolare, non abbiamo cioè né un calo di accuratezza né un calo del valore $AUC$. La stessa cosa succede all'eliminazione di $symmetry$, sempre scelto in base al \textit{p-value}. Quando, però si procede a rimuovere $smoothness$, otteniamo un aumento di accuratezza, spiegato nella matrice di confusione dal fatto che ci sia stata una classificazione corretta di tumore benigno in più rispetto ai casi precedenti. Si esclude, ora, il fattore $texture$: si riscontra un ulteriore aumento dell'accuratezza, risultante da un'aggiuntiva corretta classificazione di caso di tumore maligno. Tentiamo, infine, l'eliminazione degli attributi $compactness$ e $fractal_dimension$, mantenendo $area$ a spiegare il modello, che da sola porta un'accuratezza dell'81\%. I grafici riassuntivi del processo di riduzione del modello si trovano in figura~\ref{fig:riduzioni}: vediamo che l'opzione migliore è, appunto, quella del passo 5, in cui si hanno solo 4 fattori mantenendo valori quasi uguali al passo 0 (modello con tutti i fattori). 
+Prendendo in considerazione il modello di figura~\vref{fig:glm}, analizziamo le correlazioni tra gli attributi per cercare di ridurlo mantenendo risultati il più alti possibili. Si trova una forte relazione tra $area$ e $perimeter$, per cui procediamo a eliminare uno dei due fattori ($perimetro$), per vedere se l'altro riesce a spiegare meglio i dati: l'accuratezza scende all'87\%, in confronto all'originale del 89\%, e infatti si vede dalla matrice di confusione che il $TPR$ è diminuito, mentre l'area sotto alla curva $ROC$ è pressoché uguale. Il p-value di $area$, inoltre, è diminuito molto, come ci aspettavamo eliminando l'attributo a essa correlato. Procediamo con l'eliminazione del fattore $radius$, che presenta il \textit{p-value} minore: la situazione rimane regolare, non abbiamo cioè né un calo di accuratezza né un calo del valore $AUC$. La stessa cosa succede all'eliminazione di $symmetry$, sempre scelto in base al \textit{p-value}. Quando, però si procede a rimuovere $smoothness$, otteniamo un aumento di accuratezza, spiegato nella matrice di confusione dal fatto che ci sia stata una classificazione corretta di tumore benigno in più rispetto ai casi precedenti. Si esclude, ora, il fattore $texture$: si riscontra un ulteriore aumento dell'accuratezza, risultante da un'aggiuntiva corretta classificazione di caso di tumore maligno. Tentiamo, infine, l'eliminazione degli attributi $compactness$ e $fractalDimension$, mantenendo $area$ a spiegare il modello, che da sola porta un'accuratezza dell'81\%. I grafici riassuntivi del processo di riduzione del modello si trovano in figura~\ref{fig:riduzioni}: vediamo che l'opzione migliore è, appunto, quella del passo 6, in cui si hanno solo 4 fattori mantenendo valori quasi uguali al passo 1 (modello con tutti i fattori). 
 \begin{figure}[h]
 \centering
 \subfloat[][\emph{Andamento dell'accuratezza}\label{fig:accRiduzioni}]
